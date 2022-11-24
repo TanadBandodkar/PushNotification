@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="subscribe()">Subscribe to Push Notifications</button>
+    <script>
+        addEventListener('load', async() => {
+            // on page load create a serviceworker's instance
+            let sw = await navigator.serviceWorker.register('./sw.js');
+        });
+
+        async function subscribe() {
+            let sw = await navigator.serviceWorker.ready;
+            // request a push manager to receive notifications by pop up dialog
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly: true,
+                // applicationServerKey: 'BPOAM6bWNIraB6GCG7jEYbqMhX_6jjlHspT6mZK35FSD_MRaQ5BJAuXgVtfxXfNtv2Yg-T2PMoTo3St375d7zKw'
+                applicationServerKey: 'BCxNhG17oHiw2fOD6giH0YFriasUJq5kJCBOEqP07dLmyiYBBArNBaNojJAhY8aZYr49vN3vBXKv5EihcfSoEq0'
+            });
+            console.log('Subscription object: ', JSON.stringify(push));
+        }
+    </script>
+</body>
+</html>
